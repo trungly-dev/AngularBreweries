@@ -289,8 +289,106 @@ Step 2: Modifying Web app
 
     **** END OF 4 ways to change style  *****
 
-  
-    
+ 
+========================================
+
+Step 3: Modifying the Page Breweries.
+
+======================================== 
+ 
+
+ - Create http services.
+   . type in cmd : "C:\Users\Project\my-app> ng g s http"
+           (g = generate ; s = service)
+ 
+
+ - Go to "http.service.ts" and replace all code line:
+
+		import { Injectable } from '@angular/core';
+		import { HttpClient } from '@angular/common/http';
+
+		@Injectable({
+		    providedIn: 'root'
+		})
+		export class HttpService {
+
+		  constructor(private http:HttpClient) { }
+
+		  getBeer(){
+		    return this.http.get('https://api.openbrewerydb.org/breweries')
+		  }
+		} 
+		
+ - Go to "list.component.ts" and replace all code line:
+ 
+		import { Component, OnInit } from '@angular/core';
+		import { HttpService } from '../http.service'; 
+
+		@Component({
+		  selector: 'app-list',
+		  templateUrl: './list.component.html',
+		  styleUrls: ['./list.component.scss']
+		})
+		export class ListComponent implements OnInit {
+		  brews: Object;
+		  constructor( private _http:HttpService) { }
+
+		  ngOnInit() {
+		    this._http.getBeer().subscribe( data => {
+		    this.brews = data;
+		      console.log(this.brews);
+		    });
+		  }
+		} 
+
+ - Go to "list.component.html" and replace all code line:
+ 
+		<h1>Breweries</h1>
+		<ul *ngIf = "brews">
+		    <li *ngFor = "let brew of brews">
+			<p class="name">{{brew.name}}</p>
+			<p class="country">{{brew.country}}</p>
+			<p class="state">{{brew.state}}</p>
+			<a href="{{ brew.website_url }}" class="site">site</a>
+
+		    </li>
+		</ul>
+
+ - Go to "list.component.scss" and replace all code line: 
+ 
+		ul{
+		    list-style-type:none;
+		    margin:0;
+		    padding : 0;
+		    display: flex;
+		    flex-wrap: wrap;
+
+		    li{
+		       background: rgb(238, 238, 238) ;
+		       padding: 1em;
+		       margin-right:10px;
+		       width:20%;
+		       height: 200px;
+		       margin-bottom: 1em;
+		       display:flex;
+		       flex-direction: column;
+		    }
+
+		    p{
+			margin:0;
+		    }
+		    p.name{
+			font-weight: bold;
+			font-size: 1.2em;
+
+		    } 
+		    p.country{
+			text-transform: uppercase;
+			font-size: .9rem;
+			flex-grow: 1;
+		    }
+
+		} 
     
     
     
