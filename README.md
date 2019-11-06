@@ -391,5 +391,32 @@ Step 3: Modifying the Page Breweries.
 		} 
     
     
-    
+
+========================================
+
+Step 4: Building and Running a Webapp product (FINALLY)
+
+======================================== 
+ 
+ - INSTALL LITE-SERVER
+   . Writing a command line: 
+   
+          "C:\User\AngularProject> npm i -g lite-server"
+
+ - Running a Webapp
+   . Writing a command line: 
+   
+        "C:\User\AngularProject> lite-server"
+         (an localhost will open - for testing)
+
+
+
+===== END OF ALL PROCESS  ================== 
+
+  
+
+
+
+
+
     
